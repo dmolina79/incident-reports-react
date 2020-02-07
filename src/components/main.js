@@ -4,10 +4,13 @@ import IncidentMap from './IncidentMap';
 import { fetchIncident } from '../service/incidentService';
 
 class Main extends Component {
-    state = {
-        notFound: false,
-        lng: null,
-        lat: null,
+    constructor (props) {
+        super(props)
+        this.state = {
+            notFound: false,
+            lng: null,
+            lat: null,
+        };
     }
 
     async fetchIncident(mockIncidentId = 1) {
@@ -28,15 +31,23 @@ class Main extends Component {
         }
     }
 
+    handleClickSearch = async () => {
+        console.log('fetching incident data...')
+        await this.fetchIncident();
+    }
+
     render () {
         const {
             lng,
             lat,
             notFound
         } = this.state;
+        console.log('this.state', this.state);
         return (
             <div>
-                <SearchPanel />
+                <SearchPanel 
+                    handleClick={this.handleClickSearch}
+                />
                 <IncidentMap 
                     isMarkerShown
                     notFound={notFound}

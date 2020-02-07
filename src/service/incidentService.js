@@ -18,6 +18,7 @@ export const fetchIncident = async (incidentId) => {
     }
 
     const parsedRes =  parseIncidentData(sampleIncident);
+    console.log('parsedRes', parsedRes);
 
     return parsedRes;
 }
