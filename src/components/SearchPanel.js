@@ -19,6 +19,24 @@ const StyleInput = styled.input`
     }
 `;
 
+const BorderWrap = styled.div`
+    display: block;
+    width: 40%;
+    margin-bottom: 10px;
+    border: 2px solid;
+    border-image: 'linear-gradient(45deg, #7c85ff, #fff170) 2';
+    @media only screen and (max-width: 600px) {
+        width: 300px;
+    }
+`;
+const Module = styled.div`
+    background: transparent;
+    color: #fff;
+    margin-top: 15px;
+    font-weight: bolder;
+    font-size: 18px;
+`;
+
 const Button = styled.button`
     display: block;
     width: 90%;
@@ -36,19 +54,37 @@ const Button = styled.button`
     }
 `;
 
+const Header = styled.div`
+    background-image: 'linear-gradient(to bottom right, #000330, #000f5e,#00bbc7)'
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+`;
+
+
 
 
 class SearchPanel extends Component {
+    constructor (props) {
+        super(props)
+        this.state = {}
+    }
+    
     render () {
         const { handleClick } = this.props;
         return (
-            <div>
+            <Header>
+                <BorderWrap></BorderWrap>
                 <form>
                     ENTER INCIDENT NO.
                     <StyleInput type="text" id="incident" name="incident" />
                     <Button onClick={handleClick}>SEARCH</Button>
                 </form>
-            </div>
+            </Header>
         )
     }
 }
