@@ -1,41 +1,43 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import Map from 'pigeon-maps'
-import Marker from 'pigeon-marker'
-import Overlay from 'pigeon-overlay'
-
+import styled from 'styled-components';
+import Map from 'pigeon-maps';
+import Marker from 'pigeon-marker';
+import Overlay from 'pigeon-overlay';
 const DEF_VA_LNG = 37.541885;
 const DEF_VA_LAT = -77.440624;
-
+const MapStyle = styled.div`
+    width: auto;
+    height: 500px;
+`;
 // NOTE: had to go at last minute with this library
 // gmaps was not working with api key issues
 class IncidentMap extends Component {
     mapLocation(locationProps) {
         return {
             lat: locationProps.lat || DEF_VA_LAT,
-            lng: locationProps.lng || DEF_VA_LNG,
-        }
+            lng: locationProps.lng || DEF_VA_LNG
+        };
     }
     render() {
         console.log('map props', this.props);
         const { lat, lng } = this.mapLocation(this.props);
         return (
-            <div>
+            <MapStyle>
                 <Map center={[lat, lng]} zoom={12}>
-                    <Marker anchor={[lat, lng]} payload={1} onClick={({ event, anchor, payload }) => {}} />
-
+                    <Marker
+                        anchor={[lat, lng]}
+                        payload={1}
+                        onClick={({ event, anchor, payload }) => {}}
+                    />
                     <Overlay anchor={[lat, lng]} offset={[120, 79]}>
-                        <img src='pigeon.jpg' width={240} height={158} alt='' />
+                        <img src="pigeon.jpg" width={240} height={158} alt="" />
                     </Overlay>
-                </Map> 
-            </div>
-                 
-
+                </Map>
+            </MapStyle>
         );
-      }
+    }
 }
-
 IncidentMap.defaultProps = {
     lng: DEF_VA_LNG,
     lat: DEF_VA_LAT,
@@ -44,10 +46,9 @@ IncidentMap.defaultProps = {
     onMarkerClick: () => console.log('marker clicked!'),
     styles: {
         width: '100%',
-        height: '100%',
+        height: '100%'
     }
 };
-
 IncidentMap.propTypes = {
     lng: PropTypes.number.isRequired,
     lat: PropTypes.number.isRequired,
@@ -55,5 +56,4 @@ IncidentMap.propTypes = {
     notFound: PropTypes.bool.isRequired,
     onMarkerClick: PropTypes.func
 };
-
 export default IncidentMap;
