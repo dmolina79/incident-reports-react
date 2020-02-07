@@ -37,6 +37,7 @@ const Module = styled.div`
     margin-top: 15px;
     font-weight: bolder;
     font-size: 18px;
+    text-align: center;
 `;
 const Button = styled.button`
     display: block;
