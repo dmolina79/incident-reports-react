@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { compose, withProps } from 'recompose';
 import InfoBox from 'react-google-maps/lib/components/addons/InfoBox';
 import {
@@ -55,5 +56,17 @@ const IncidentMap = compose(
         )}
     </GoogleMap>
 ));
+
+IncidentMap.defaultProps = {
+    isMarkerShown: true,
+    onMarkerClick: () => console.log('marker clicked!')
+};
+
+IncidentMap.propTypes = {
+    lng: PropTypes.number.isRequired,
+    lat: PropTypes.number.isRequired,
+    isMarkerShown: PropTypes.bool.isRequired,
+    onMarkerClick: PropTypes.func
+};
 
 export default IncidentMap;
