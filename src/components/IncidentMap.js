@@ -43,7 +43,7 @@ const IncidentMap = compose(
                 }}
             >
                 <div style={{ fontSize: '16px', fontColor: '#08233B' }}>
-                    Hello, Richmond!
+                    { props.notFound ? "Incident Not Found!" : "Hello, Richmond!" } 
                 </div>
             </div>
         </InfoBox>
@@ -57,7 +57,13 @@ const IncidentMap = compose(
     </GoogleMap>
 ));
 
+const DEF_VA_LNG = 37.541885;
+const DEF_VA_LAT = -77.440624;
+
 IncidentMap.defaultProps = {
+    lng: DEF_VA_LNG,
+    lat: DEF_VA_LAT,
+    notFound: false,
     isMarkerShown: true,
     onMarkerClick: () => console.log('marker clicked!')
 };
@@ -66,6 +72,7 @@ IncidentMap.propTypes = {
     lng: PropTypes.number.isRequired,
     lat: PropTypes.number.isRequired,
     isMarkerShown: PropTypes.bool.isRequired,
+    notFound: PropTypes.bool.isRequired,
     onMarkerClick: PropTypes.func
 };
 

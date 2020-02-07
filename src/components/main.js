@@ -6,7 +6,8 @@ import { fetchIncident } from '../service/incidentService';
 class Main extends Component {
     state = {
         notFound: false,
-
+        lng: null,
+        lat: null,
     }
 
     async fetchIncident(mockIncidentId = 1) {
@@ -15,18 +16,33 @@ class Main extends Component {
 
         // if we dont have lat or lng incident not found
         if (!lat || !lng) {
-            this.setState({ notFound: true });
+            this.setState({ 
+                notFound: true,
+            });
         } else {
-
+            this.setState({ 
+                notFound: false,
+                lat,
+                lng
+            });
         }
     }
 
     render () {
+        const {
+            lng,
+            lat,
+            notFound
+        } = this.state;
         return (
             <div>
-                Main component
                 <SearchPanel />
-                <IncidentMap />
+                <IncidentMap 
+                    isMarkerShown
+                    notFound={notFound}
+                    lat={lat}
+                    lng={lng}
+                />
             </div>
         )
     }
