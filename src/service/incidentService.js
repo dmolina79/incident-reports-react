@@ -21,7 +21,6 @@ const fetchWeatherInfo = async ({ lng, lat, time }) => {
         const config = {
             headers: {
                 "Content-Type": "application/json",
-                // This line was having CORS issues from chrome since API is http
                 // "Access-Control-Allow-Origin": "*"
             },
             crossdomain: true,
@@ -43,7 +42,14 @@ export const fetchIncident = async (incidentId) => {
 
     const parsedRes =  parseIncidentData(sampleIncident);
 
-    const weatherInfo = await fetchWeatherInfo(parsedRes);
+    let weatherInfo;
+    try {
+        weatherInfo = await fetchWeatherInfo(parsedRes);
+    } catch (error) {
+        console.error('Could not fetch weather information', error);
+        weatherInfo = { hourly: { summary: 'error fetching weather info'}};
+    }
+   
 
     const weatherSummary = _.get(weatherInfo, 'hourly.summary', 'No weather information found')
 
