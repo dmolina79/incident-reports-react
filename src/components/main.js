@@ -8,8 +8,9 @@ class Main extends Component {
         notFound: false,
 
     }
-    async componentDidMount() {
-        const mockIncidentId = 1;
+
+    async fetchIncident(mockIncidentId = 1) {
+        // pretend method goes to a real API
         const { lat, lng } = await fetchIncident(mockIncidentId);
 
         // if we dont have lat or lng incident not found
@@ -19,6 +20,7 @@ class Main extends Component {
 
         }
     }
+
     render () {
         return (
             <div>
