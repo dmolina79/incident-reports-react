@@ -78,12 +78,13 @@ class SearchPanel extends Component {
         const { handleClick } = this.props;
         return (
             <Header>
-                <BorderWrap></BorderWrap>
-                <form>
-                    ENTER INCIDENT NO.
-                    <StyleInput type="text" id="incident" name="incident" />
-                    <Button onClick={handleClick}>SEARCH</Button>
-                </form>
+                <BorderWrap>
+                    <form>
+                        ENTER INCIDENT NO.
+                        <StyleInput type="text" id="incident" name="incident" />
+                        <Button onClick={handleClick}>SEARCH</Button>
+                    </form>
+                </BorderWrap>
             </Header>
         )
     }
