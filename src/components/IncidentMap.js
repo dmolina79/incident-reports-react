@@ -22,40 +22,43 @@ const IncidentMap = compose(
     }),
     withScriptjs,
     withGoogleMap
-)(props => (
-    <GoogleMap
-        defaultZoom={8}
-        defaultCenter={{ lat: props.lat, lng: props.lng }}
-    >
-        {/*  */}
-        <InfoBox
-            defaultPosition={
-                // eslint-disable-next-line no-undef
-                new google.maps.LatLng(props.center.lat, props.center.lng)
-            }
-            options={{ closeBoxURL: ``, enableEventPropagation: true }}
+)(props => {
+    console.log('map props', props);
+    return (
+        <GoogleMap
+            defaultZoom={8}
+            defaultCenter={{ lat: props.lat, lng: props.lng }}
         >
-            <div
-                style={{
-                    backgroundColor: 'yellow',
-                    opacity: '0.75',
-                    padding: '12px'
-                }}
+            {/*  */}
+            <InfoBox
+                defaultPosition={
+                    // eslint-disable-next-line no-undef
+                    new google.maps.LatLng(props.center.lat, props.center.lng)
+                }
+                options={{ closeBoxURL: ``, enableEventPropagation: true }}
             >
-                <div style={{ fontSize: '16px', fontColor: '#08233B' }}>
-                    { props.notFound ? "Incident Not Found!" : "Hello, Richmond!" } 
+                <div
+                    style={{
+                        backgroundColor: 'yellow',
+                        opacity: '0.75',
+                        padding: '12px'
+                    }}
+                >
+                    <div style={{ fontSize: '16px', fontColor: '#08233B' }}>
+                        { props.notFound ? "Incident Not Found!" : "Hello, Richmond!" } 
+                    </div>
                 </div>
-            </div>
-        </InfoBox>
-        {/*  */}
-        {props.isMarkerShown && (
-            <Marker
-                position={{ lat: props.lat, lng: props.lng }}
-                onClick={props.onMarkerClick}
-            />
-        )}
-    </GoogleMap>
-));
+            </InfoBox>
+            {/*  */}
+            {props.isMarkerShown && (
+                <Marker
+                    position={{ lat: props.lat, lng: props.lng }}
+                    onClick={props.onMarkerClick}
+                />
+            )}
+        </GoogleMap>
+    )
+});
 
 const DEF_VA_LNG = 37.541885;
 const DEF_VA_LAT = -77.440624;
