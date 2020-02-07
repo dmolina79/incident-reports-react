@@ -79,6 +79,14 @@ const EmojiToggle = styled.span`
     font-family: Arial sans-serif;
 `;
 
+const TextWeatherStyle = styled.div`
+    background: transparent;
+    color: ${props => (props.isDark ? '#fff' : '#000688')};
+    margin-top: 15px;
+    font-size: 18px;
+    text-align: center;
+`;
+
 
 
 class SearchPanel extends Component {
@@ -94,7 +102,7 @@ class SearchPanel extends Component {
     }
     
     render () {
-        const { handleClick } = this.props;
+        const { handleClick, weatherSummary } = this.props;
         const { isDark } = this.state;
         return (
             <Header isDark={isDark}>
@@ -107,6 +115,7 @@ class SearchPanel extends Component {
                         isDark={isDark}
                         onClick={handleClick}
                     >SEARCH</Button>
+                    
             </BorderWrap>
             <StyledToggle
                 onChange={this.changeTheme}
@@ -126,6 +135,9 @@ class SearchPanel extends Component {
                     </EmojiToggle>
                 }
             />
+            <TextWeatherStyle isDark={isDark}>
+                Weather summary: <span>{weatherSummary || ''}</span>
+            </TextWeatherStyle>
         </Header>
 
         )
@@ -138,6 +150,7 @@ SearchPanel.defaultProps = {
 
 SearchPanel.propTypes = {
     handleClick: PropTypes.func.isRequired,
+    weatherSummary: PropTypes.string
 };
 
 export default SearchPanel;

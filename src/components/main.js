@@ -10,12 +10,13 @@ class Main extends Component {
             notFound: false,
             lng: null,
             lat: null,
+            weatherSummary: '',
         };
     }
 
     async loadIncident(mockIncidentId = 1) {
         // pretend method goes to a real API
-        const { lat, lng } = await fetchIncident(mockIncidentId);
+        const { lat, lng, weatherSummary } = await fetchIncident(mockIncidentId);
 
         // if we dont have lat or lng incident not found
         if (!lat || !lng) {
@@ -26,7 +27,8 @@ class Main extends Component {
             this.setState({ 
                 notFound: false,
                 lat,
-                lng
+                lng,
+                weatherSummary
             });
         }
     }
@@ -41,13 +43,15 @@ class Main extends Component {
         const {
             lng,
             lat,
-            notFound
+            notFound,
+            weatherSummary
         } = this.state;
         console.log('this.state', this.state);
         return (
             <div>
                 <SearchPanel 
                     handleClick={this.handleClickSearch}
+                    weatherSummary={weatherSummary}
                 />
                 <IncidentMap 
                     isMarkerShown
