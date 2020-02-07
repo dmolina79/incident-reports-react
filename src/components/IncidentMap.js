@@ -8,6 +8,8 @@ import Overlay from 'pigeon-overlay'
 const DEF_VA_LNG = 37.541885;
 const DEF_VA_LAT = -77.440624;
 
+// NOTE: had to go at last minute with this library
+// gmaps was not working with api key issues
 class IncidentMap extends Component {
     mapLocation(locationProps) {
         return {
