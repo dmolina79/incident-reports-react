@@ -13,7 +13,7 @@ class Main extends Component {
         };
     }
 
-    async fetchIncident(mockIncidentId = 1) {
+    async loadIncident(mockIncidentId = 1) {
         // pretend method goes to a real API
         const { lat, lng } = await fetchIncident(mockIncidentId);
 
@@ -33,7 +33,7 @@ class Main extends Component {
 
     handleClickSearch = async () => {
         console.log('fetching incident data...')
-        await this.fetchIncident();
+        await this.loadIncident();
     }
 
     render () {
