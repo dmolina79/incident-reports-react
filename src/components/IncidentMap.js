@@ -1,74 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose, withProps } from 'recompose';
-import InfoBox from 'react-google-maps/lib/components/addons/InfoBox';
-import {
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
-    Marker
-} from 'react-google-maps';
 
-// NOTE: following docs from 
-// https://tomchentw.github.io/react-google-maps/#usage--configuration
-const IncidentMap = compose(
-    withProps({
-        googleMapURL:
-            'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places',
-        loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `400px` }} />,
-        mapElement: <div style={{ height: `100%` }} />,
-        center: { lat: 37.541885, lng: -77.440624 }
-    }),
-    withScriptjs,
-    withGoogleMap
-)(props => {
-    console.log('map props', props);
-    return (
-        <GoogleMap
-            defaultZoom={8}
-            defaultCenter={{ lat: props.lat, lng: props.lng }}
-        >
-            {/*  */}
-            <InfoBox
-                defaultPosition={
-                    // eslint-disable-next-line no-undef
-                    new google.maps.LatLng(props.center.lat, props.center.lng)
-                }
-                options={{ closeBoxURL: ``, enableEventPropagation: true }}
-            >
-                <div
-                    style={{
-                        backgroundColor: 'yellow',
-                        opacity: '0.75',
-                        padding: '12px'
-                    }}
-                >
-                    <div style={{ fontSize: '16px', fontColor: '#08233B' }}>
-                        { props.notFound ? "Incident Not Found!" : "Hello, Richmond!" } 
-                    </div>
-                </div>
-            </InfoBox>
-            {/*  */}
-            {props.isMarkerShown && (
-                <Marker
-                    position={{ lat: props.lat, lng: props.lng }}
-                    onClick={props.onMarkerClick}
-                />
-            )}
-        </GoogleMap>
-    )
-});
+import Map from 'pigeon-maps'
+import Marker from 'pigeon-marker'
+import Overlay from 'pigeon-overlay'
 
 const DEF_VA_LNG = 37.541885;
 const DEF_VA_LAT = -77.440624;
+
+class IncidentMap extends Component {
+    mapLocation(locationProps) {
+        return {
+            lat: locationProps.lat || DEF_VA_LAT,
+            lng: locationProps.lng || DEF_VA_LNG,
+        }
+    }
+    render() {
+        console.log('map props', this.props);
+        const { lat, lng } = this.mapLocation(this.props);
+        return (
+            <div>
+                <Map center={[lat, lng]} zoom={12}>
+                    <Marker anchor={[lat, lng]} payload={1} onClick={({ event, anchor, payload }) => {}} />
+
+                    <Overlay anchor={[lat, lng]} offset={[120, 79]}>
+                        <img src='pigeon.jpg' width={240} height={158} alt='' />
+                    </Overlay>
+                </Map> 
+            </div>
+                 
+
+        );
+      }
+}
 
 IncidentMap.defaultProps = {
     lng: DEF_VA_LNG,
     lat: DEF_VA_LAT,
     notFound: false,
     isMarkerShown: true,
-    onMarkerClick: () => console.log('marker clicked!')
+    onMarkerClick: () => console.log('marker clicked!'),
+    styles: {
+        width: '100%',
+        height: '100%',
+    }
 };
 
 IncidentMap.propTypes = {
