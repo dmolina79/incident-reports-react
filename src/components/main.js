@@ -31,7 +31,8 @@ class Main extends Component {
         }
     }
 
-    handleClickSearch = async () => {
+    handleClickSearch = async (event) => {
+        event.preventDefault();
         console.log('fetching incident data...')
         await this.loadIncident();
     }

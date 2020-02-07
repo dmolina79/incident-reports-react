@@ -98,7 +98,6 @@ class SearchPanel extends Component {
         return (
             <Header isDark={isDark}>
             <BorderWrap isDark={isDark}>
-                <form isDark={isDark}>
                     <Module class="module" isDark={isDark}>
                         ENTER INCIDENT NO.
                     </Module>
@@ -107,7 +106,6 @@ class SearchPanel extends Component {
                         isDark={isDark}
                         onClick={handleClick}
                     >SEARCH</Button>
-                </form>
             </BorderWrap>
             <StyledToggle
                 onChange={this.changeTheme}
