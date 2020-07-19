@@ -9,7 +9,7 @@
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
     "google-maps-react": "^2.0.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "pigeon-maps": "^0.14.0",
     "pigeon-marker": "^0.3.4",
     "pigeon-overlay": "^0.2.3",
